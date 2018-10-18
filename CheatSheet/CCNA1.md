@@ -1,15 +1,18 @@
-# Cheatography
+# Cheatography - CCNA1
 ## OS
 ### Commons
 - `ipconfig` command
-	- display all IP configuration :
-	- `ipconfig <IP@> <subnet-mask@>` : set the IP @ and the subnet mask @
+	- `ipconfig <IP@> <IPmask@> <gatewayIP@` : set the IP @ and the subnet mask @
 - `arp` command :
 	- `arp -a` : display all ARP entries
 	- `arp -d` : Clear the ARP table
+- `netstat` command : display all active aonnections
+	- `netstat -r` or `route print`: Display all routing entries
+	- `netstat -n` : Display ip@ and port number
+- `ssh -l <username> <@IP>` : Start ssh connection
 
 ### IOS
-Access Méthods :
+Access methods :
 - Console (don't need network configuration)
 - Telnet
 - SSH
@@ -22,11 +25,12 @@ Access Méthods :
 	- `#(config-if)` : config interface mode
 	- `#(config-line)` : config interface mode
 - `[<cmd>]?` : global help or command help
+- `do <cmd>` : do lower level command
 - `exit` | `logout`  :  Exit from the EXEC
 
 #### Normal Mode
 - Prompt : `>`
-- `traceroute <IP @>` : connaitre les routers entre deux hotes (>ping)
+- `traceroute <IPV4/V6 @>` : know routers between hosts (>ping)
 
 #### Enable Mode (SU)
 - Prompt : `#`
@@ -40,15 +44,21 @@ Access Méthods :
 		- `show flash` : show flash config
 	- `show mac-address-table` : show MAC @ table
 	- `show arp` : show ARP cache (or ARP table)
-	- `show ip <tag>` : show ip informations :
-		- `show ip route` : show ip route
-		- `show ip interface brief` : show IP status and configuration briefing of all interfaces
+	- `show ip[v6] <tag>` : show ip informations :
+		- `show ip[v6] route` : show ip route
+		- `show ip[v6] interface brief` : show IP status and configuration briefing of all interfaces
 	- `show interfaces` : Show interfaces briefing :
 		- `show interfaces <interface_type> <interface#>` : show  interface brief
 		Exemple #1 : `show interfaces GigabitEthernet 0/0` show GigabitEthernet 0/0 informations
 		Exemple #2 : `show interfaces Serial 0/0/0` show serial 0/0/0 informations
+	- `show arp`
+	- `show ip route`
+	- `show ip interface brief`
+	- `show protocols`
+	- `show users`
+	- `show version`
 - `copy <src> <dest>` : copy storage to an other storage
-	- `copy running-config startup-config` : save running config
+	- `copy running-config startup-config` | `write`: save running config
 	- `copy startup-config running-config` : undo running config modification
 
 #### Configuration  Mode
@@ -62,17 +72,29 @@ Access Méthods :
 - `banner <mode> <msg>` :config banner
 	- `banner motd <mymotd>` : config the "Message Of The Day" (to advert specified unauthorized people)
 	- `banner login <msg>` : config the login message
-- Enter in other configuration mode :
-	- `line <line_type> <line#>` : Enter config mode on terminal type for line # X
-	- `end` : exit config mode
-	- `interface <interface_type> <0-9>` : Enter config interface mode for # X
-
+- `ipv6 unicast-routing`: Enable IPV6
+- `ip default-gateway <@IP>` : Set default gateway (used by VLAN)
+- `ip domain-name <domain>` : Set domain name to the router
+- `[no] ip domain-lookup` : Toggle domain lookup
+- `username <username> password <password>` : Create user
+- `crypto key generate rsa` : Generate RSA key
+- `login block-for <x> attempts <y> within <z>` : Block x attempts during y minutes within z minutes
+- `line <line_type> <line#>` : Enter config mode on terminal type for line # X
+- `end` : exit config mode
+- `interface <interface_type> <0-9>` : Enter config interface mode for # X
+- `security passwords min-length <count>` : Set a minimum length to a password
 ##### Configuration line Mode
 - Prompt: `#(config-line)`
 - `line <line_type> <line#>` : enter config mode on terminal type for line # X
-	Exemple : `line console 0` : configure console line # 0
-- `[no] password <password>` : toggle a password
-- `login` : enable password checking
+	Exemples :
+	- `line console 0` : configure Primary terminal #0
+	- `line vty 0 4` : configure Virtual terminal #0 to #4
+- Enable password :
+	- `[no] password <password>` : toggle a password
+	- `login` : enable password checking
+- Enable SSH :
+	- `transport input ssh`
+	- `login local`
 
 ##### Configuration Interfaces Mode
 - Prompt : `#hostname(config-if)`
@@ -80,7 +102,11 @@ Access Méthods :
 	Exemple : `interface vlan <vlan#>` : Enter configuration mode for Vlan number #
 - `[no] shutdown` : toggle interface
 - `ip` : config ip :
-	- `ip address <@IP> <mask>` : change ip
+	- `ip[v6] address <@IP> <mask>` : change ip and IPmask
+	- `ip[v6] address <@IP>/<mask>` : change ip
+	- `ip[v6] default-gateway <IP@>` : add default gateway
+	- `ipv6 address <@IPv6> link-local` : change link local IPv6 @
+		- `ipv6 address FE80::1 link-local`
 - `description <desc>` : set description to the interface
 ---
 ## OSI Model
@@ -138,21 +164,16 @@ Access Méthods :
 - Gratuitous ARP Request :
 	- MAC dest @ = "ff:ff:ff:ff:ff:ff"  (broadcast MAC)
 	- IP Source and destination @ are the same (IP src @ = IP dest @)
-	- No reply will occure
-	- Update MAC @ in ARP table if IP is recognized otherwise it's dropped
-
-#### Exemple :  A -> B (A know B's IP)
-All datas are cleared (no mac @ table, no ARP cache)
-1. `A` prepare to send data to `B`
-	1.  A check if B is on his network
-		- logical & between the IP @ of `B` and the IP Mask @ of `A`
-		- logical & between the IP @ of `A` and the IP Mask @ of `A`
-		- If equals -> same network otherwise other network (here equals)
-	2. `A` look for the MAC@ of `B`
-		- check if the IP@ of `B` is present in the ARP cache
-		- if present A know MAC@ of `B` with the IP@ of `B`
+	- No reply will occures
+	- Update existant entries in ARP tables
 
 ### IP
+-Cast :
+	- Unicast :
+	- Multicast :
+	- Broadcast :
+		- Limited :
+		- Directed
 ### NAT/PAT
 ---
 ## Physical
@@ -218,3 +239,4 @@ It is all node devices
 ## Organisations :
 - IEEE : Institute of Electrical and Electronics Engineers
 - ISP : internet Service Provider
+- IETF :

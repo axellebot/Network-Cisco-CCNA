@@ -1,7 +1,6 @@
-# Chaptre 5
+# Chapter 5
 
-
-## Protocole Ethernet 2 (PDU = Trame)
+##  Ethernet 2 Protocol (PDU = Frame)
 >  Network access layer (modèle TCP/IP) (Ethernet Protocol)= phycsical layer + link layer (modèle OSI)
 
 - Group 2 layers :

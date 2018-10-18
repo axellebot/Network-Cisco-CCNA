@@ -1,4 +1,4 @@
-# Chapitre 2
+# Chapter 2
 ## Objectifs
 - Pro and Cons of static routing
 - Config Cisco switch  ( ports , ...)
