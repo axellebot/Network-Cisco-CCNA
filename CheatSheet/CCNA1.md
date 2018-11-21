@@ -72,7 +72,7 @@ Access methods :
 - `banner <mode> <msg>` :config banner
 	- `banner motd <mymotd>` : config the "Message Of The Day" (to advert specified unauthorized people)
 	- `banner login <msg>` : config the login message
-- `ipv6 unicast-routing`: Enable IPV6
+- `ipv6 unicast-routing`: Enable IPV6 Fowarding
 - `ip default-gateway <@IP>` : Set default gateway (used by VLAN)
 - `ip domain-name <domain>` : Set domain name to the router
 - `[no] ip domain-lookup` : Toggle domain lookup
