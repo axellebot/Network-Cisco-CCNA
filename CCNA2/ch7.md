@@ -99,6 +99,7 @@ Routing without class :
 - Using now multicast (routers ar subscribed to multicast address)
 
 ## RIP & RIPng
+RIP is encapsulate by UDP
 ### RIPv1 :
 ```
 router rip

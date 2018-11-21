@@ -124,19 +124,19 @@ Access methods :
 		- HTTP
 		- RIP : Routing Information Protocol
 	- Transport Layer (PDU : Segment/Datagram) :
-		- TCP : Transport Communication Protocol
-		- UDP : User Datagram Protocol
+		- TCP : Transport Communication Protocol (0x06 in ethernet type field)
+		- UDP : User Datagram Protocol (0x17 in ethernet type field)
 - Media layers :
 	- Network Layer (PDU : Packet) :
+		- IP (IPv4/IPv6): Internet Protocol (type 0800 for ethernet type field) -> (more)[https://en.wikipedia.org/wiki/List_of_IP_protocol_numbers]
 		- AppleTalk :
-		- EIGRP : Enhanced Interior Gateway Routing Protocol
-		- IP (IPv4/IPv6): Internet Protocol (type 0800)
-		- ICMP : Internet Control Message Protocol (ping)
-		- IGMP : Internet Group Management Protocol
-		- OSPF : Open Shortest Path First
+		- EIGRP : Enhanced Interior Gateway Routing Protocol (0x58)
+		- ICMP : Internet Control Message Protocol (0x01  for IP type field)
+		- IGMP : Internet Group Management Protocol (0x02 for IP type field)
+		- OSPF : Open Shortest Path First (0x89 for IP type field)
 	- Data Link Layer (PDU : Frame) :
-		- ARP : Address Resolution Procotol (type 0806)
 		- Ethernet 802.3
+		- ARP : Address Resolution Procotol (type 0806 for ethernet type field)
 		- MAC (sublayer): Media Access Control
 		- LLC (sublayer) : Logical Link Control
 			- CSMA/CA : Carrier-Sense Multiple Access with Collision Avoidance
@@ -145,8 +145,7 @@ Access methods :
 		- STP : Spanning Tree Protocol
 			Running on bridges and switches
 			ensure that there is no loops (cause by redundant paths)
-		- PPP : Point to Point Protocol
-		 Used to establish a direct connection between two nodes
+		- PPP : Point to Point Protocol : Used to establish a direct connection between two nodes
 		- Frame Relay
 		- ATM (Asynchronous Transfer Mode)
 	- Physical Layer (PDU : Bit):
