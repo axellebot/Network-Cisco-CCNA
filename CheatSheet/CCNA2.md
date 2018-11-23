@@ -10,13 +10,13 @@
 ![Security Violation Modes](./images/security-violation_mode.png)
 
 ### VLAN :
-- Set switchport mode : `switchport mode <trunk|access|dynamic>`
+- Set switchport mode : `switchport mode {trunk|access|dynamic}`
 - Set the native vlan: `switchport native vlan <vlanId>`
 - Set access mode on vlan : `switchport access vlan <vlanId>`
 - Add allowed vlan to trunk port : `switchport trunk allowed vlan add <vlanId>`
 - Disable negotiation protocol : `switchport nonegotiate`
 ![DTP - Negotiated Interfaces Modes](./images/DTP.png)
-- Set the dynamic mode `switchport mode dynamic <auto|desirable>`
+- Set the dynamic mode `switchport mode dynamic {auto|desirable}`
 
 Database manager of switch : "SDM (Switch Database Manager)"
 
@@ -57,7 +57,8 @@ Routing with class :
 - `[no] distance <administrative_distance>` : Edit administrative distance on routing protocol
 - `[no] version <#version>` : toggle protocol version
 - `[no] auto-summary` : toggle route summary
-- `network <net_ip>` : Adding network to routing flow
+- `[no] network <net_ip>` : Adding network to routing flow :
+  - RIP -> `[no] network <class_net_address>` : use class net address
 - `[no] passive interface <interface>` : Disable routing protocol on interface
 - `[no] default-information originate` : include default static route in routing update protocol (desitribute default route to others routers)
 - `[no] ipv6 router <routing_protocol> <name>` : Enable IPv6 protocol

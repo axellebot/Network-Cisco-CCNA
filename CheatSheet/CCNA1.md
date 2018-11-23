@@ -125,7 +125,7 @@ Access methods :
 		- RIP : Routing Information Protocol
 	- Transport Layer (PDU : Segment/Datagram) :
 		- TCP : Transport Communication Protocol (0x06 in ethernet type field)
-		- UDP : User Datagram Protocol (0x17 in ethernet type field)
+		- UDP : User Datagram Protocol (0x11 in ethernet type field)
 - Media layers :
 	- Network Layer (PDU : Packet) :
 		- IP (IPv4/IPv6): Internet Protocol (type 0800 for ethernet type field) -> (more)[https://en.wikipedia.org/wiki/List_of_IP_protocol_numbers]
