@@ -22,7 +22,7 @@ Database manager of switch : "SDM (Switch Database Manager)"
 
 ## Inter-VLAN
 - Show type of switchport `show interfaces <interface> switchport`
-- Set encapsulation on interface : `encapsulation <protocol> <vlanId>`
+- Set encapsulation for vlan on sub-interface : `encapsulation <protocol> <vlanId> [native]`
 - Disable switchport and enable routed port : `no switchport`
 
 ## Router
@@ -66,6 +66,46 @@ Routing with class :
 
 - `[no] ip classless` : (default behavior) Disable classless (not about routing by class)
 - `[no] debug <ip|ipv6> <routing_protocol>` : toggle debug for routing protocol
+
+### ACL - Access List
+
+
+- `show access-lists` : Show access-lists info and statistics
+- `clear access-list counters <ACL_id>` reset counters
+
+
+- Set ACL on interface :`ip access-group {access-list-number|access-list-name} {in|out}`
+- Delete : `no access-list <access-list-number>`
+- Add remark : `access-list <access-list-number> remark <remark>`
+- Delete ACL line :
+  ```
+  ip access-list {standard | extended} <ACL_id>
+  no <line_number>
+  ```
+- Insert ACL line :
+  ```
+  ip access-list {standard|extended} <ACL_id>
+  <line_number> ...
+  ```
+- Set access list on VTY :
+    ```
+    transport input ssh
+    access-class <access_list_id> {in|out}`
+    ```
+- IPv4 :
+  - Standard :
+  ```
+  access-list <access-list-number 1-99> {permit|deny} [remark] {host <sender_address> | <sender_address> [sender_wildcard_mask] <sender_address> | any}  
+  ```
+  - Extended :
+  ```
+  access-list <access-list-number 100-199q> {permit|deny} [remark] <protocol> {host <source_ip> | any | <source_network_ip> <wildcard_mask} [{eq|lt|gt} <source_port>] [dest_port {eq|lt|gt} <dest_port>] [etablished]
+  ```
+- IPv6 :
+```
+ipv6 access-list <access-list-name>
+{deny|permit|remark} <protocol> {<source-ipv6-prefix/prefix-length> | any | host <source-ipv6-address>} [{eq | gt | ls} <source-port>]
+```
 
 ## Misc
 ### IOS Commands
