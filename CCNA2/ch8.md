@@ -11,11 +11,14 @@
 - Scalable
 
 - Databases :
-  - Contiguity Database :
+  - Adjacency  Database :
     - Show neighborhood : `show ip ospf neighbor`
   - LSDB -> Link-State Data Base
     - Show LSDB : `show ip ospf database`
   - Foward database (routing table) : `show ip route`
+
+- Disagnated Router only on multiaccess topology
+
 
 - All LSP (Link-State Packet) with code to identitfy them :
   - 00x1 -> Hello packet (neighbor detection and contiguity + Parameters + DR Designated Router and BDR Backup Designated Router)
@@ -39,7 +42,7 @@ Sates :
   - Init State (send Hello)
   - Two-way State (receive Hello)
 - Exchange :
-  - Start Exchange State
+  - Exchange Start State
   - Exchange State
   - Loading State
 - Full State

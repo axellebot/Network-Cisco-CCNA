@@ -83,6 +83,7 @@ Access methods :
 - `end` : exit config mode
 - `interface <interface_type> <0-9>` : Enter config interface mode for # X
 - `security passwords min-length <count>` : Set a minimum length to a password
+
 ##### Configuration line Mode
 - Prompt: `#(config-line)`
 - `line <line_type> <line#>` : enter config mode on terminal type for line # X

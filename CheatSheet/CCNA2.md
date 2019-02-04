@@ -34,7 +34,7 @@ Database manager of switch : "SDM (Switch Database Manager)"
 ### Statics Routing
 - Config routes
   - Set static route :
-    - ipv4 : `[no] ip route <@subnet_ip> <subnet_mask> <network_ip> {exit_interface|next_hop_ip} [metric_distance]`
+    - ipv4 : `[no] ip route <@subnet_ip> <subnet_mask> <exit_interface | next_hop_ip> [exit_interface | next_hop_ip] [metric_distance]`
     - ipv6 : `[no] ipv6 route <@subnet_ipv6/prefix_length> {interface|@next_hop_ipv6} [metric_distance]`
   - Set default gateway :
     - IPv4 : `[no] ip route 0.0.0.0 0.0.0.0 <ip-address|exit-interface> [metric_distance]`
@@ -68,8 +68,6 @@ Routing with class :
 - `[no] debug <ip|ipv6> <routing_protocol>` : toggle debug for routing protocol
 
 ### ACL - Access List
-
-
 - `show access-lists` : Show access-lists info and statistics
 - `clear access-list counters <ACL_id>` reset counters
 
@@ -109,11 +107,15 @@ ipv6 access-list <access-list-name>
 
 ## Misc
 ### IOS Commands
-- Enable SSH v2 `ip ssh version 2`
+- Config SSH :
+  - Enable SSH v2 `ip ssh version 2`
+  - Set time out : `ip ssh authentication-retries <number-of-retries>`
+  - Set time out : `ip ssh time-out <seconds>`
 - Config interface 3 to 24 : `interface range FasEthernet 0/3 - 24`
 - Don't limite display : `terminal length 0`
 - `traceroute`:Trace route to destination
 - Show :
+  - `show <misc> | {include <inclusion>| section <section-name>}` : Filter show prompt
   - `show ip protocols` : Display enabled routing protocols
   - `show ip interface` : Displays the IP interface status and configuration
     - `show ip interface brief`: Displays a brief summary of IP status and configuration

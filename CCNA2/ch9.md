@@ -1,4 +1,4 @@
-# CCNA - Chapter 9 -  ACL (Access List)
+# CCNA2 - Chapter 9 -  ACL (Access List)
 ## Caracteristics
 Use ACL after routing.
 Steps :
@@ -27,7 +27,7 @@ Using wildcard mask in IPv4
 - IP : 192.168.1.1 + Wildcard : 255.255.255.255 => filtering all -> use `any`
 
 - 3 P rule :
-  - 1 ACL by network protocol
+  - 1 ACL by network protocol (ex: IPv4, IPv6)
   - 1 ACL by interface
   - 1 ACL by direction (in/out)
 
