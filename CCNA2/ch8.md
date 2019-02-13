@@ -91,7 +91,7 @@ Use IPv6
 Use link-local IPv6
 - Sending LSP in multicast to all `FF02:05` to DR with `FF02:06`
 - Enable router process : `ipv6 router ospf <process_id>`
-- Add network to process `ipv6 ospf <ospf_pid> area <areaId>`
+- Add network to process `ipv6 ospf <ospf_pid> area <areaId>` (default area is 0 )
 
 
 - Check

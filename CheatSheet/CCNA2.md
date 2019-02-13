@@ -1,5 +1,5 @@
 # Cheatography - CCNA2
-## Switch
+## Layer 2
 - Configure SVI : `interface vlan <vlan#>`
 ### Security
 - Enable port security : `[no] switchport port-security`
@@ -9,10 +9,11 @@
 
 ![Security Violation Modes](./images/security-violation_mode.png)
 
-### VLAN :
+### VLAN
 - Set switchport mode : `switchport mode {trunk|access|dynamic}`
 - Set the native vlan: `switchport native vlan <vlanId>`
-- Set access mode on vlan : `switchport access vlan <vlanId>`
+- Set access mode on vlan : `[] switchport access vlan <vlanId>`
+- Set allowed vlan to trunk port : `[no] switchport trunk allowed vlan <#>,<#>,<#>,<#>-<#>,<#>-<#>,<#>-<#>,<#>-<#>`
 - Add allowed vlan to trunk port : `switchport trunk allowed vlan add <vlanId>`
 - Disable negotiation protocol : `switchport nonegotiate`
 ![DTP - Negotiated Interfaces Modes](./images/DTP.png)
@@ -20,12 +21,12 @@
 
 Database manager of switch : "SDM (Switch Database Manager)"
 
-## Inter-VLAN
+### Inter-VLAN Router on stick
 - Show type of switchport `show interfaces <interface> switchport`
 - Set encapsulation for vlan on sub-interface : `encapsulation <protocol> <vlanId> [native]`
 - Disable switchport and enable routed port : `no switchport`
 
-## Router
+## Layer 3
 - Config ipv6 link local : `ipv6 address <@ipv6> link-local`
 - Administrative Distance : Level of trust
 ![Default Administrative Distance](./images/default_administrative_distance.png)
@@ -53,7 +54,7 @@ Routing with class :
   - If the received route in same network of input interface -> adding route with input interface subnet mask
   - If the received route not in same network of input interface -> adding the route with the mask of the classe
 
-- `router <routing_protocol>` : Enable routing protocol and enter in router config mode
+- `router <routing_protocol> <process_id>` : Enable routing protocol and enter in router config mode
 - `[no] distance <administrative_distance>` : Edit administrative distance on routing protocol
 - `[no] version <#version>` : toggle protocol version
 - `[no] auto-summary` : toggle route summary
@@ -105,13 +106,41 @@ ipv6 access-list <access-list-name>
 {deny|permit|remark} <protocol> {<source-ipv6-prefix/prefix-length> | any | host <source-ipv6-address>} [{eq | gt | ls} <source-port>]
 ```
 
+### DHCP
+- Show :
+  - From server :
+    - `show ip dhcp binding` : MAC@ <-> IP@
+    - `show ip dhcp server statistics` :
+    - `show ip dhcp conflict`
+  - From Client :
+    - `show running-config | section dhcp` :
+
+- `[no] ip dhcp excluded-address <low-address> [<high-address>]` : exclude range of address
+
+-  Relay :`ip helper-address <next-hop-dns-ip-address>` : foward some UDP services -> heure,TACAS, DNS, client BOOTTP/DHCP,  server BOOTTP/DHCP, TFTP, names service NetBios, datagram service NetBios
+
+- `[no] ip address dhcp` : set ip address from dhcp servers
+
+- `[no] ip dhcp pool <pool-name>` : enter dhcp config mode
+
+ Configure DHCP server in DHCP configuration mode :
+- `network <ip-address> <ip-mask>` : Set pool of address
+- `default-router <gateway-address> [<gateway-address>] [...]` : Set default gateway address
+- `dns-server <dns-address>` : set dns server address
+- `domain-name <domain-name>`
+- `lease <time>` : define leasing time
+
+- `debug ip packet`
+- `debug ip dhcp server events`
+
 ## Misc
 ### IOS Commands
 - Config SSH :
   - Enable SSH v2 `ip ssh version 2`
   - Set time out : `ip ssh authentication-retries <number-of-retries>`
   - Set time out : `ip ssh time-out <seconds>`
-- Config interface 3 to 24 : `interface range FasEthernet 0/3 - 24`
+  - Config interface 3 to 24 : `interface range FastEthernet 0/3 - 24`
+- Config interface 3 and 24 : `interface range <link_type> 0/3,  <link_type> 0/24`
 - Don't limite display : `terminal length 0`
 - `traceroute`:Trace route to destination
 - Show :

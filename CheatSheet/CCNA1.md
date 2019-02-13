@@ -74,10 +74,11 @@ Access methods :
 	- `banner login <msg>` : config the login message
 - `ipv6 unicast-routing`: Enable IPV6 Fowarding
 - `ip default-gateway <@IP>` : Set default gateway (used by VLAN)
-- `ip domain-name <domain>` : Set domain name to the router
+- `[no] ip domain-name <domain>` : Set domain name to the router
 - `[no] ip domain-lookup` : Toggle domain lookup
 - `username <username> password <password>` : Create user
 - `crypto key generate rsa` : Generate RSA key
+	- `crypto key generate rsa general-keys modulus <number>` : with modulus
 - `login block-for <x> attempts <y> within <z>` : Block x attempts during y minutes within z minutes
 - `line <line_type> <line#>` : Enter config mode on terminal type for line # X
 - `end` : exit config mode
@@ -123,20 +124,20 @@ Access methods :
 		- TLS/SSL
 		- XMPP
 		- HTTP
-		- RIP : Routing Information Protocol
 	- Transport Layer (PDU : Segment/Datagram) :
 		- TCP : Transport Communication Protocol (0x06 in ethernet type field)
 		- UDP : User Datagram Protocol (0x11 in ethernet type field)
 - Media layers :
 	- Network Layer (PDU : Packet) :
-		- IP (IPv4/IPv6): Internet Protocol (type 0800 for ethernet type field) -> (more)[https://en.wikipedia.org/wiki/List_of_IP_protocol_numbers]
+		- IP (IPv4/IPv6): Internet Protocol (type 0800 for ethernet type field) -> (more)[https://en.wikipedia.org/wiki/List_of_IP_protocol_numbers] :
+			- RIP : Routing Information Protocol
+			- EIGRP : Enhanced Interior Gateway Routing Protocol (0x58)
+			- ICMP : Internet Control Message Protocol (0x01  for IP type field)
+			- IGMP : Internet Group Management Protocol (0x02 for IP type field)
+			- OSPF : Open Shortest Path First (0x89 for IP type field)
 		- AppleTalk :
-		- EIGRP : Enhanced Interior Gateway Routing Protocol (0x58)
-		- ICMP : Internet Control Message Protocol (0x01  for IP type field)
-		- IGMP : Internet Group Management Protocol (0x02 for IP type field)
-		- OSPF : Open Shortest Path First (0x89 for IP type field)
 	- Data Link Layer (PDU : Frame) :
-		- Ethernet 802.3
+		- Ethernet  IEEE 802.3
 		- ARP : Address Resolution Procotol (type 0806 for ethernet type field)
 		- MAC (sublayer): Media Access Control
 		- LLC (sublayer) : Logical Link Control
@@ -238,5 +239,5 @@ It is all node devices
 ---
 ## Organisations :
 - IEEE : Institute of Electrical and Electronics Engineers
-- ISP : internet Service Provider
-- IETF :
+- ISP : Internet Service Provider
+- IETF : Internet Engineering Task Force
