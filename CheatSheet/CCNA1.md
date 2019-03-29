@@ -169,13 +169,15 @@ Access methods :
 	- Update existant entries in ARP tables
 
 ### IP
--Cast :
+- Cast :
 	- Unicast :
 	- Multicast :
 	- Broadcast :
-		- Limited :
+		- Limited
 		- Directed
+
 ### NAT/PAT
+
 ---
 ## Physical
 ### Topology Diagrams :
@@ -214,30 +216,28 @@ Auto MDI-X :automatically detects the required cable connection type and configu
 ### Network Devices
 It is all node devices
 
-- End Devices :
-	- IP Phone
-	- Laptop
-	- PC
-	- Printer
-	- Phone
-	- Server
-	- Smartphone
-	- Sniffer
-	- TV
+- End Devices (IP Phone, Laptop, PC, Printer, Phone, Server, Smartphone, Sniffer, TV)
 - Routers
 - Switches
 - Hubs
-- Wireless Devices
-	- Access Point
-	- Cell Tower
-- Security :
-	- Firewall
-- WAN Emulator :
-	- DSL Modem
-	- Cable Modem
+- Wireless Devices (Access Point, Cell Tower)
+- Security (Firewall)
+- WAN Emulator (DSL Modem, Cable Modem)
 
 ---
+
 ## Organisations :
-- IEEE : Institute of Electrical and Electronics Engineers
+- IEEE : Institute of Electrical and Electronics Engineers (Ethernet ...) : Give mac address ID 3 first bytes
 - ISP : Internet Service Provider
 - IETF : Internet Engineering Task Force
+- IANA : Normalize internet ID (IP Address, Autonomous system ID ...)
+
+## IPv4 class
+
+| Class | Bit     | Start | End |
+| :------------- | :------------- |
+| Class A     | 0xxxxxxx |  0.0.0.0 | 127.255.255.255 |
+| Class B     | 10xxxxxx | 128.0.0.0 | 191.255.255.255 |  
+| Class C     | 110xxxxx | 192.0.0.0 | 223.255.255.255 |
+| Multicast  | 1110xxxx | 224.0.0.0 | 239.255.255.255 |
+| Reserved  | 1111xxxx | 240.0.0.0 | 255.255.255.255 |

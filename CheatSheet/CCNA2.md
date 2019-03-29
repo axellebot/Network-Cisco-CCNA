@@ -1,6 +1,8 @@
 # Cheatography - CCNA2
+
 ## Layer 2
 - Configure SVI : `interface vlan <vlan#>`
+
 ### Security
 - Enable port security : `[no] switchport port-security`
 - Set secured mac address : `switchport port-security mac-address <H.H.H.H|sticky>`
@@ -16,8 +18,17 @@
 - Set allowed vlan to trunk port : `[no] switchport trunk allowed vlan <#>,<#>,<#>,<#>-<#>,<#>-<#>,<#>-<#>,<#>-<#>`
 - Add allowed vlan to trunk port : `switchport trunk allowed vlan add <vlanId>`
 - Disable negotiation protocol : `switchport nonegotiate`
-![DTP - Negotiated Interfaces Modes](./images/DTP.png)
+
+|  |  Dynamic Auto   | Dynamic Desirable |  Trunk | Access |
+| :------------- | :------------- |
+| Dynamic Auto | Access| Trunk | Trunk | Access |
+| Dynamic Desirable | Trunk | Trunk | Trunk | Access |
+| Trunk | Trunk | Trunk | Trunk | Limited Connectivity |
+| Access | Access | Access | Limited Connectivity | Access |
+
 - Set the dynamic mode `switchport mode dynamic {auto|desirable}`
+
+
 
 Database manager of switch : "SDM (Switch Database Manager)"
 
@@ -29,22 +40,70 @@ Database manager of switch : "SDM (Switch Database Manager)"
 ## Layer 3
 - Config ipv6 link local : `ipv6 address <@ipv6> link-local`
 - Administrative Distance : Level of trust
-![Default Administrative Distance](./images/default_administrative_distance.png)
 - Metric : Determine best path
 ![Type of route]()
+
+**Default metrics :**
+// TODO
+
+**Default Administrative Distance :**
+
+| Route Source     | Default Distance Metric    |
+| :------------- | :------------- |
+| Connected interface	  | 0       |
+| Static route	| 1 |
+| Enhanced Interior Gateway Routing Protocol (EIGRP) summary route | 5 |
+| External Border Gateway Protocol (BGP) | 20 |
+| Internal EIGRP | 90 |
+| IGRP	| 100 |
+| OSPF | 110 |
+| Intermediate System-to-Intermediate System (IS-IS) | 115 |
+|  Routing Information Protocol (RIP)	| 120 |
+| Exterior Gateway Protocol (EGP)	| 140 |
+| On Demand Routing (ODR)	| 160 |
+| External EIGRP	| 170 |
+| Internal BGP	| 200 |
+| Unknown*	| 255 |
+
+**Routing table Codes :**
+
+ | Code | Description     |
+ | :------------- | :------------- |
+ | C       | Connected       |
+ | S      | Static       |
+ | I     | IGRP       |
+ | R      | RIP       |
+ | M     | Mobile       |
+ | B     | BGP       |
+ | D | EIGRP |
+ | EX    | EIGRP external  |
+ | O | OSPF |
+ | IA | OSPF Inter Area|
+ | N1 | OSPF NSSA external type 1 |
+ | N2 | OSPF NSSA external type 2 |
+ | E1 | OSPF external type 1|
+ | E2 | OSPF external type 2 |
+ | E | EGP |
+ | i | IS-IS |
+ | L1 | IS-IS level-1 |
+ | L2 | IS-IS level-2 |
+ | ia | IS-IS inter area |
+ | * | candidate default |
+ | U | per-user static route |
+ | o | ODR |
+ | p | periodic downloaded static route |
+
 ### Statics Routing
 - Config routes
   - Set static route :
-    - ipv4 : `[no] ip route <@subnet_ip> <subnet_mask> <exit_interface | next_hop_ip> [exit_interface | next_hop_ip] [metric_distance]`
-    - ipv6 : `[no] ipv6 route <@subnet_ipv6/prefix_length> {interface|@next_hop_ipv6} [metric_distance]`
+    - IPv4 : `[no] ip route <@subnet_ip> <subnet_mask> <exit_interface | next_hop_ip> [exit_interface | next_hop_ip] [metric_distance]`
+    - IPv6 : `[no] ipv6 route <@subnet_ipv6/prefix_length> {interface|@next_hop_ipv6} [metric_distance]`
   - Set default gateway :
     - IPv4 : `[no] ip route 0.0.0.0 0.0.0.0 <ip-address|exit-interface> [metric_distance]`
     - IPv6 : `[no] ipv6 route ::/0 <ipv6-address|exit-interface> [metric_distance]`
 
 ### Dynamics Routing
 Split horizon : To avoid loop router -> don't send on interfaces routes teached from this interface.
-
-![Routing Protocol Classification](./images/routing_protocol_classification.png)
 
 Routing with class :
 - Sending :
@@ -54,24 +113,37 @@ Routing with class :
   - If the received route in same network of input interface -> adding route with input interface subnet mask
   - If the received route not in same network of input interface -> adding the route with the mask of the classe
 
-- `router <routing_protocol> <process_id>` : Enable routing protocol and enter in router config mode
-- `[no] distance <administrative_distance>` : Edit administrative distance on routing protocol
+- Enable routing protocol and enter in router config mode :
+  - IPv4 `[no] router <routing_protocol> <process_id|autonomous-system-number>`
+  - IPv6 :
+  ```
+  [no] ipv6 router <routing_protocol> <process_id|autonomous-system-number>
+  [no] shutdown
+  ```
+
+- Edit administrative distance on routing protocol : `[no] distance <administrative_distance>`
 - `[no] version <#version>` : toggle protocol version
 - `[no] auto-summary` : toggle route summary
-- `[no] network <net_ip>` : Adding network to routing flow :
-  - RIP -> `[no] network <class_net_address>` : use class net address
+Adding network to routing flow :
+  - IPv4 : `[no] network <net_ip>` :
+    - RIP -> `[no] network <class_net_address>` : use class net address
+  - IPv6 :
+  ```
+  interface <interface_id>
+  [no] ipv6 <protocol> <processId> [area <#area>]
+  ```
 - `[no] passive interface <interface>` : Disable routing protocol on interface
-- `[no] default-information originate` : include default static route in routing update protocol (desitribute default route to others routers)
-- `[no] ipv6 router <routing_protocol> <name>` : Enable IPv6 protocol
+- `[no] default-information originate` : include default static route in routing update protocol (destribute default route to others routers)
+
 - `[no] ipv6 rip <name> enable` : Enable RIPng on interface
 
 - `[no] ip classless` : (default behavior) Disable classless (not about routing by class)
 - `[no] debug <ip|ipv6> <routing_protocol>` : toggle debug for routing protocol
 
+
 ### ACL - Access List
 - `show access-lists` : Show access-lists info and statistics
 - `clear access-list counters <ACL_id>` reset counters
-
 
 - Set ACL on interface :`ip access-group {access-list-number|access-list-name} {in|out}`
 - Delete : `no access-list <access-list-number>`
@@ -88,7 +160,6 @@ Routing with class :
   ```
 - Set access list on VTY :
     ```
-    transport input ssh
     access-class <access_list_id> {in|out}`
     ```
 - IPv4 :
@@ -98,7 +169,7 @@ Routing with class :
   ```
   - Extended :
   ```
-  access-list <access-list-number 100-199q> {permit|deny} [remark] <protocol> {host <source_ip> | any | <source_network_ip> <wildcard_mask} [{eq|lt|gt} <source_port>] [dest_port {eq|lt|gt} <dest_port>] [etablished]
+  access-list <access-list-number 100-199> {permit|deny} [remark] <protocol> {host <source_ip> | any | <source_network_ip> <wildcard_mask} [{eq|lt|gt} <source_port>] [dest_port {eq|lt|gt} <dest_port>] [etablished]
   ```
 - IPv6 :
 ```
@@ -133,28 +204,32 @@ ipv6 access-list <access-list-name>
 - `debug ip packet`
 - `debug ip dhcp server events`
 
+---
+
 ## Misc
 ### IOS Commands
 - Config SSH :
   - Enable SSH v2 `ip ssh version 2`
   - Set time out : `ip ssh authentication-retries <number-of-retries>`
   - Set time out : `ip ssh time-out <seconds>`
-  - Config interface 3 to 24 : `interface range FastEthernet 0/3 - 24`
+- Config interface 3 to 24 : `interface range <link_type> 0/3 - 24`
 - Config interface 3 and 24 : `interface range <link_type> 0/3,  <link_type> 0/24`
 - Don't limite display : `terminal length 0`
 - `traceroute`:Trace route to destination
+
 - Show :
   - `show <misc> | {include <inclusion>| section <section-name>}` : Filter show prompt
   - `show ip protocols` : Display enabled routing protocols
   - `show ip interface` : Displays the IP interface status and configuration
     - `show ip interface brief`: Displays a brief summary of IP status and configuration
-  - `show ip route` : Displays the full IP routing table
-    - `show ip route <type|protocol>` : Displays a list of active route, exemple : `show ip route connected`
+- `show ip route` : Displays the full IP routing table
+  - `show ip route <type|protocol>` : Displays a list of active route, exemple : `show ip route connected`
+- `show interfaces`
   - `show interfaces <interface> switchport` : Show global or interface switchport config
-  - `show interface trunk` : Show trunk config
-  - `show running-config` : Displays the current operating configuration
-  - `show port-security <address|interface>`: Show port security info :
-  - `show vlan [brief]` : Show VLAN config
+  - `show interfaces trunk` : Show trunk config
+- `show running-config` : Displays the current operating configuration
+- `show port-security <address|interface>`: Show port security info :
+- `show vlan [brief]` : Show VLAN config
 
 - `boot system` : Set BOOT environment
 
@@ -167,8 +242,6 @@ ipv6 access-list <access-list-name>
 ## Others
 - Line configration :
   - Point to point : PPP (Serial)
-  - Multipoint : Ethernet
+  - Multipoint : Ethernet (FastEthernet/GigabitEthernet/...)
 
   ![Point to point vs Multipoint ](./images/point2point_vs_multipoint.png)
-
-- Class of network : ![Classification](./images/classification.jpg)

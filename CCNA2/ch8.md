@@ -67,7 +67,7 @@ Synchronisation of Database :
   - default 2 -> highest ip address from active interfaces
   - need reload or `clear ip ospf <process_id>`
 - `[no] priority` : OSPF topology priority
-- `[no] passive-interface` : Supress routing updates on an interface
+- `[no] passive-interface {default|<interace_id>}` : Supress routing updates on an interface
 - `[no] auto-cost {reference-bandwidth} <bandwidth>`: change reference bandwidth to calculsate cost  
 - `[no] network <net_add> <wildcard_mask> area <area_id>`
 - `[no] network <net_add> 0.0.0.0 area <area_id>` : Auto calculate wildcard mask.
@@ -91,10 +91,14 @@ Use IPv6
 Use link-local IPv6
 - Sending LSP in multicast to all `FF02:05` to DR with `FF02:06`
 - Enable router process : `ipv6 router ospf <process_id>`
-- Add network to process `ipv6 ospf <ospf_pid> area <areaId>` (default area is 0 )
+- Add network to process : (default area is 0 )
+```
+interface <interface>
+ipv6 ospf <ospf_pid> area <areaId>
+```
 
 
 - Check
   - `show ipv6 ospf neighbor` : check contiguity
-  - `shop ipv6 protocols` : show routing protocols
+  - `show ipv6 protocols` : show routing protocols
   - `show ipv6 ospf interface [brief]`
