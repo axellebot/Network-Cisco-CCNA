@@ -1,10 +1,7 @@
 # Chapter 9 - IOS images
 
-
-
 All IOS images are multi-platform
 `show license feature`
-
 
 Flow :
 - Buy License

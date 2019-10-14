@@ -2,6 +2,7 @@
 
 ## Spanning Tree
 - Toggle ST : `[no] spanning-tree`
+  - Set root : `[<vlan#> root {primary|secondary}]`
   - Edit link cost : `[no] spanning-tree cost <value>`
   - Edit mode `spanning-tree mode {rapid-pvst|pvst}`
 - `show spanning-tree` : show spanning tree protocols info

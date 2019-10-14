@@ -9,7 +9,14 @@
 - Set maximum mac address on the port : `switchport port-security maximum <# of authorized devices>`
 - Set violation rule : `switchport port-security violation <protect|restrict|shutdown>`
 
-![Security Violation Modes](./images/security-violation_mode.png)
+Security Violation Modes :
+
+| Violation Mode | Forwards Traffic | Sends syslog Message | displays Error Message | Increases Violation counter | Shuts Down Port |
+|------|----|---|----|---|----|
+| Protect | No | No | No | No | No |
+| Restrict | No | Yes | No | Yes | No |
+| Shutdown | No | No | No | Yes | Yes |
+
 
 ### VLAN
 - Set switchport mode : `switchport mode {trunk|access|dynamic}`
@@ -158,10 +165,7 @@ Adding network to routing flow :
   ip access-list {standard|extended} <ACL_id>
   <line_number> ...
   ```
-- Set access list on VTY :
-    ```
-    access-class <access_list_id> {in|out}`
-    ```
+
 - IPv4 :
   - Standard :
   ```
@@ -171,11 +175,23 @@ Adding network to routing flow :
   ```
   access-list <access-list-number 100-199> {permit|deny} [remark] <protocol> {host <source_ip> | any | <source_network_ip> <wildcard_mask} [{eq|lt|gt} <source_port>] [dest_port {eq|lt|gt} <dest_port>] [etablished]
   ```
+
 - IPv6 :
 ```
 ipv6 access-list <access-list-name>
 {deny|permit|remark} <protocol> {<source-ipv6-prefix/prefix-length> | any | host <source-ipv6-address>} [{eq | gt | ls} <source-port>]
 ```
+
+- Set access list on interfaces :
+  - VTY IPv4 :
+    ```
+    access-class <access_list_id> {in|out}`
+    ```
+  - VTY IPv6 :
+    ```
+    ipv6 access-class <access_list_id> {in|out}`
+    ```
+  - Interface IPv6 `ipv6 traffic-filter <ACL-name>`
 
 ### DHCP
 - Show :
@@ -188,7 +204,7 @@ ipv6 access-list <access-list-name>
 
 - `[no] ip dhcp excluded-address <low-address> [<high-address>]` : exclude range of address
 
--  Relay :`ip helper-address <next-hop-dns-ip-address>` : foward some UDP services -> heure,TACAS, DNS, client BOOTTP/DHCP,  server BOOTTP/DHCP, TFTP, names service NetBios, datagram service NetBios
+- Relay :`ip helper-address <next-hop-dns-ip-address>` : foward some UDP services -> heure,TACAS, DNS, client BOOTTP/DHCP,  server BOOTTP/DHCP, TFTP, names service NetBios, datagram service NetBios
 
 - `[no] ip address dhcp` : set ip address from dhcp servers
 
@@ -237,11 +253,16 @@ ipv6 access-list <access-list-name>
 - `ipconfig` : The output of the default command contains the IP address, network mask and gateway for all physical and virtual network adapters.
  - `ipconfig /all` : This option displays the same IP addressing information for each adapter as the default option. Additionally, it displays DNS and WINS settings for each adapter.
 - `nslookup <name>` : Displays information that you can use to diagnose Domain Name System (DNS) infrastructure.
-- `tracert <name|@ip>` - Determines the path taken to a destination by sending Internet Control Message Protocol (ICMP) Echo Request messages to the destination with incrementally increasing Time to Live (TTL) field values. The path displayed is the list of near-side router interfaces of the routers in the path between a source host and a destination. The near-side interface is the interface of the router that is closest to the sending host in the path. Used without parameters, tracert displays help.
+- `tracert <name|@ip>` : Determines the path taken to a destination by sending Internet Control Message Protocol (ICMP) Echo Request messages to the destination with incrementally increasing Time to Live (TTL) field values. The path displayed is the list of near-side router interfaces of the routers in the path between a source host and a destination. The near-side interface is the interface of the router that is closest to the sending host in the path. Used without parameters, tracert displays help.
 
 ## Others
-- Line configration :
-  - Point to point : PPP (Serial)
-  - Multipoint : Ethernet (FastEthernet/GigabitEthernet/...)
+- Line configuration :
+  - Point to point: PPP (Serial)
+  - Multipoint: Ethernet (FastEthernet/GigabitEthernet/...)
 
-  ![Point to point vs Multipoint ](./images/point2point_vs_multipoint.png)
+| Basis for comparaison | Point-to-Point | Multipoint |
+|----|----|----|
+| Link | there is dedicated link between two devices. | The link is shared between more than two devices. |
+| Channel Capacity | The Channel's entire capacity is reserved for the two connected devices. | The channel's capacity is shared temporaly among the devices connected to the link. |
+| Transmitter and Receiver | There is a single transmitter and a single receiver. | There is a single transmitter and multiple receivers. |
+| Example | Frame relay, T-carrier, X.25, etc. | Frame relay, token ring, Ethernet, ATM, etc. |
