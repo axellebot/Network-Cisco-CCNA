@@ -11,30 +11,30 @@
 	- `netstat -n` : Display ip@ and port number
 - `ssh -l <username> <@IP>` : Start ssh connection
 
-### IOS
+## IOS
 Access methods :
 - Console (don't need network configuration)
 - Telnet
 - SSH
 
-#### Commons
+### Commons
 - Prompts :
 	- `>` : standard mode
 	- `#` : root (voir diff croisillon vs diese)
 	- `#(config)` : config mode
-	- `#(config-if)` : config interface mode
-	- `#(config-line)` : config interface mode
+	- `#(config-if)` : interface config mode
+	- `#(config-line)` : line config mode
 - `[<cmd>]?` : global help or command help
 - `do <cmd>` : do lower level command
 - `exit` | `logout`  :  Exit from the EXEC
 
-#### Normal Mode
+### Normal Mode
 - Prompt : `>`
 - `traceroute <IPV4/V6 @>` : know routers between hosts (>ping)
 
-#### Enable Mode (SU)
+### Enable Mode (SU)
 - Prompt : `#`
-- `enable` : enter admin mode ( more command )
+- `enable` : enter admin mode (more command)
 - `disable` : exit admin mode
 - `configure <stuff>` : enter configuration mode on stuff
 - `show <info_type>` : show informations
@@ -49,8 +49,8 @@ Access methods :
 		- `show ip[v6] interface brief` : show IP status and configuration briefing of all interfaces
 	- `show interfaces` : Show interfaces briefing :
 		- `show interfaces <interface_type> <interface#>` : show  interface brief
-		Exemple #1 : `show interfaces GigabitEthernet 0/0` show GigabitEthernet 0/0 informations
-		Exemple #2 : `show interfaces Serial 0/0/0` show serial 0/0/0 informations
+		Exemple \#1 : `show interfaces GigabitEthernet 0/0` show GigabitEthernet 0/0 informations
+		Exemple \#2 : `show interfaces Serial 0/0/0` show serial 0/0/0 informations
 	- `show arp`
 	- `show ip route`
 	- `show ip interface brief`
@@ -61,19 +61,19 @@ Access methods :
 	- `copy running-config startup-config` | `write`: save running config
 	- `copy startup-config running-config` : undo running config modification
 
-#### Configuration  Mode
+### Configuration Mode
 - Prompt : `#(config)`
 - `hostname <name>` : rename switch
 - `configure terminal` : enter configuration mode on terminal
-- `[no] enable password <password>` : toggle config password (default non-crypted)
-- `[no] enable secret <secret>` : toggle secret (crypted secret)
+- `[no] enable password <password>` : toggle "enable" password (default non-encrypted)
+- `[no] enable secret <secret>` : toggle "enable" secret (encrypted)
 - `[no] service password-encryption` : toggle password encryption
 - `router` : change route protocol
 - `banner <mode> <msg>` :config banner
 	- `banner motd <mymotd>` : config the "Message Of The Day" (to advert specified unauthorized people)
 	- `banner login <msg>` : config the login message
 - `ipv6 unicast-routing`: Enable IPV6 Fowarding
-- `ip default-gateway <@IP>` : Set default gateway (used by VLAN)
+- `ip default-gateway <@IP>` : Set default gateway (used with VLAN)
 - `[no] ip domain-name <domain>` : Set domain name to the router
 - `[no] ip domain-lookup` : Toggle domain lookup
 - `username <username> password <password>` : Create user
@@ -85,12 +85,12 @@ Access methods :
 - `interface <interface_type> <0-9>` : Enter config interface mode for # X
 - `security passwords min-length <count>` : Set a minimum length to a password
 
-##### Configuration line Mode
+### Line Configuration Mode
 - Prompt: `#(config-line)`
 - `line <line_type> <line#>` : enter config mode on terminal type for line # X
 	Exemples :
-	- `line console 0` : configure Primary terminal #0
-	- `line vty 0 4` : configure Virtual terminal #0 to #4
+	- `line console 0` : configure Primary terminal \#0
+	- `line vty 0 4` : configure Virtual terminal \#0 to \#4
 - Enable password :
 	- `[no] password <password>` : toggle a password
 	- `login` : enable password checking
@@ -98,7 +98,7 @@ Access methods :
 	- `transport input ssh`
 	- `login local`
 
-##### Configuration Interfaces Mode
+### Interface Configuration Mode
 - Prompt : `#hostname(config-if)`
 - `interface <interface_type> <interface#>` : Enter config interface mode on interface type for # X :
 	Exemple : `interface vlan <vlan#>` : Enter configuration mode for Vlan number #
@@ -110,7 +110,9 @@ Access methods :
 	- `ipv6 address <@IPv6> link-local` : change link local IPv6 @
 		- `ipv6 address FE80::1 link-local`
 - `description <desc>` : set description to the interface
+
 ---
+
 ## OSI Model
 ![OSI Model](./images/osi-small.png)
 
@@ -129,7 +131,7 @@ Access methods :
 		- UDP : User Datagram Protocol (0x11 in ethernet type field)
 - Media layers :
 	- Network Layer (PDU : Packet) :
-		- IP (IPv4/IPv6): Internet Protocol (type 0800 for ethernet type field) -> (more)[https://en.wikipedia.org/wiki/List_of_IP_protocol_numbers] :
+		- IP (IPv4/IPv6): Internet Protocol (type 0800 for ethernet type field) [more](https://en.wikipedia.org/wiki/List_of_IP_protocol_numbers) :
 			- RIP : Routing Information Protocol
 			- EIGRP : Enhanced Interior Gateway Routing Protocol (0x58)
 			- ICMP : Internet Control Message Protocol (0x01  for IP type field)
@@ -178,8 +180,8 @@ Access methods :
 
 ### NAT/PAT
 
-
 ---
+
 ## Physical
 ### Topology Diagrams :
 - Physical :
@@ -235,10 +237,10 @@ It is all node devices
 
 ## IPv4 class
 
-| Class | Bit     | Start | End |
-| :------------- | :------------- |
-| Class A     | 0xxxxxxx |  0.0.0.0 | 127.255.255.255 |
-| Class B     | 10xxxxxx | 128.0.0.0 | 191.255.255.255 |  
-| Class C     | 110xxxxx | 192.0.0.0 | 223.255.255.255 |
-| Multicast  | 1110xxxx | 224.0.0.0 | 239.255.255.255 |
+| Class | Bit  | Start | End |
+|:-------------|:-------------|:-------------|:-------------|
+| Class A   | 0xxxxxxx | 0.0.0.0 | 127.255.255.255 |
+| Class B   | 10xxxxxx | 128.0.0.0 | 191.255.255.255 |  
+| Class C   | 110xxxxx | 192.0.0.0 | 223.255.255.255 |
+| Multicast | 1110xxxx | 224.0.0.0 | 239.255.255.255 |
 | Reserved  | 1111xxxx | 240.0.0.0 | 255.255.255.255 |

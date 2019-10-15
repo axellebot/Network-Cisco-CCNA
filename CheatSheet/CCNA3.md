@@ -61,7 +61,7 @@ Router(config-if)#{ip|ipv6} ospf cost <cost>
 
 - Config intervals :
 ```
-Router(config-int)#ip ospf {hello-interval | dead-interval} <seconds>
+Router(config-if)#ip ospf {hello-interval | dead-interval} <seconds>
 ```
 
 -  reload ospf process : `Router#clear ip ospf process`
