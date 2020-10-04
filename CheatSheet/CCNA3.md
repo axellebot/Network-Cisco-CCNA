@@ -64,35 +64,38 @@ Router(config-if)#{ip|ipv6} ospf cost <cost>
 Router(config-if)#ip ospf {hello-interval | dead-interval} <seconds>
 ```
 
--  reload ospf process : `Router#clear ip ospf process`
+-  reload ospf process :
+```
+Router#clear ip ospf process
+```
 
 - Show  OSPF informations :
   - `show {ip|ipv6} ospf neighbor` : show neighbor list
   - `show {ip|ipv6} ospf interface` : Show ospf configured interfaces
 
 ## EIGRP
-EIGRP can be configured with custom "Autonomous system number" (1-65535) :
+EIGRP can be configured with custom non-official "Autonomous system number" (1-65535) :
 
 - Enable EIGRP process :
 ```
-[no] [ipv6] router eigrp <IAS#>
-[no] shutdown
+Router(config)#[no] [ipv6] router eigrp <IAS#>
+Router(config-rtr)[no] shutdown
 ```
 
 - change router-id :
 ```
-router eigrp <IAS#>
-eigrp router-id <router_id>
+Router(config)#router eigrp <IAS#>
+Router(config-rtr)#eigrp router-id <router_id>
 ```
 
 Summary :
 - `[no] auto-summary` : toggle automatic network number summarization
-- Add ip summarization :
+- Add IP summarization :
 ```
 Router(config-if)#ip summary-address eigrp <eigrp_AS#> <net_ip> <net_mask>
 ```
 
-- Propragate route : `redistribute {static|}`
+- Propagate static route (ex: default route) : `redistribute {static|}`
 
 -  MD5 Authentication :
 ```
@@ -103,7 +106,7 @@ Router(config-if)#{ip|ipv6} authentication mode eigrp <IAS#> md5
 Router(config-if)#{ip|ipv6} authentication key-chain eigrp <IAS#> <key_chain_string>
 ```
 
-- `show {ip|ipv6} eigrp interface` : Show ospf configured interfaces
+- `show {ip|ipv6} eigrp interface` : Show eigrp configured interfaces
 
 ## IOS Images
 - Show flash : `show flash`
