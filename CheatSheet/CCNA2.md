@@ -1,21 +1,23 @@
 # Cheatography - CCNA2
 
 ## Layer 2
+
 - Configure SVI : `interface vlan <vlan#>`
 
 ### Security
+
 - Enable port security : `[no] switchport port-security`
-- Set secured mac address : `switchport port-security mac-address <H.H.H.H|sticky>`
+- Set secured mac address : `switchport port-security mac-address {sticky|<H.H.H>}`
 - Set maximum mac address on the port : `switchport port-security maximum <# of authorized devices>`
-- Set violation rule : `switchport port-security violation <protect|restrict|shutdown>`
+- Set violation rule : `switchport port-security violation {protect|restrict|shutdown}`
 
 Security Violation Modes :
 
 | Violation Mode | Forwards Traffic | Sends syslog Message | displays Error Message | Increases Violation counter | Shuts Down Port |
-|------|----|---|----|---|----|
-| Protect | No | No | No | No | No |
-| Restrict | No | Yes | No | Yes | No |
-| Shutdown | No | No | No | Yes | Yes |
+| -------------- | ---------------- | -------------------- | ---------------------- | --------------------------- | --------------- |
+| Protect        | No               | No                   | No                     | No                          | No              |
+| Restrict       | No               | Yes                  | No                     | Yes                         | No              |
+| Shutdown       | No               | No                   | No                     | Yes                         | Yes             |
 
 
 ### VLAN
@@ -26,12 +28,12 @@ Security Violation Modes :
 - Add allowed vlan to trunk port : `switchport trunk allowed vlan add <vlanId>`
 - Disable negotiation protocol : `switchport nonegotiate`
 
-|  |  Dynamic Auto   | Dynamic Desirable |  Trunk | Access |
-| :------------- | :------------- |
-| Dynamic Auto | Access| Trunk | Trunk | Access |
-| Dynamic Desirable | Trunk | Trunk | Trunk | Access |
-| Trunk | Trunk | Trunk | Trunk | Limited Connectivity |
-| Access | Access | Access | Limited Connectivity | Access |
+|                   | Dynamic Auto | Dynamic Desirable | Trunk                | Access               |
+|:----------------- |:------------ | ----------------- | -------------------- | -------------------- |
+| Dynamic Auto      | Access       | Trunk             | Trunk                | Access               |
+| Dynamic Desirable | Trunk        | Trunk             | Trunk                | Access               |
+| Trunk             | Trunk        | Trunk             | Trunk                | Limited Connectivity |
+| Access            | Access       | Access            | Limited Connectivity | Access               |
 
 - Set the dynamic mode `switchport mode dynamic {auto|desirable}`
 
@@ -39,7 +41,7 @@ Security Violation Modes :
 
 Database manager of switch : "SDM (Switch Database Manager)"
 
-### Inter-VLAN Router on stick
+### Inter-VLAN (Router on stick)
 - Show type of switchport `show interfaces <interface> switchport`
 - Set encapsulation for vlan on sub-interface : `encapsulation <protocol> <vlanId> [native]`
 - Disable switchport and enable routed port : `no switchport`
@@ -55,50 +57,51 @@ Database manager of switch : "SDM (Switch Database Manager)"
 
 **Default Administrative Distance :**
 
-| Route Source     | Default Distance Metric    |
-| :------------- | :------------- |
-| Connected interface	  | 0       |
-| Static route	| 1 |
-| Enhanced Interior Gateway Routing Protocol (EIGRP) summary route | 5 |
-| External Border Gateway Protocol (BGP) | 20 |
-| Internal EIGRP | 90 |
-| IGRP	| 100 |
-| OSPF | 110 |
-| Intermediate System-to-Intermediate System (IS-IS) | 115 |
-|  Routing Information Protocol (RIP)	| 120 |
-| Exterior Gateway Protocol (EGP)	| 140 |
-| On Demand Routing (ODR)	| 160 |
-| External EIGRP	| 170 |
-| Internal BGP	| 200 |
-| Unknown*	| 255 |
+| Route Source                                                     | Default Distance Metric |
+|:---------------------------------------------------------------- | -----------------------:|
+| Connected interface                                              |                       0 |
+| Static route                                                     |                       1 |
+| Enhanced Interior Gateway Routing Protocol (EIGRP) summary route |                       5 |
+| External Border Gateway Protocol (BGP)                           |                      20 |
+| Internal EIGRP                                                   |                      90 |
+| IGRP                                                             |                     100 |
+| OSPF                                                             |                     110 |
+| Intermediate System-to-Intermediate System (IS-IS)               |                     115 |
+| Routing Information Protocol (RIP)                               |                     120 |
+| Exterior Gateway Protocol (EGP)                                  |                     140 |
+| On Demand Routing (ODR)                                          |                     160 |
+| External EIGRP                                                   |                     170 |
+| Internal BGP                                                     |                     200 |
+| Unknown*                                                         |                     255 |
 
 **Routing table Codes :**
 
- | Code | Description     |
- | :------------- | :------------- |
- | C       | Connected       |
- | S      | Static       |
- | I     | IGRP       |
- | R      | RIP       |
- | M     | Mobile       |
- | B     | BGP       |
- | D | EIGRP |
- | EX    | EIGRP external  |
- | O | OSPF |
- | IA | OSPF Inter Area|
- | N1 | OSPF NSSA external type 1 |
- | N2 | OSPF NSSA external type 2 |
- | E1 | OSPF external type 1|
- | E2 | OSPF external type 2 |
- | E | EGP |
- | i | IS-IS |
- | L1 | IS-IS level-1 |
- | L2 | IS-IS level-2 |
- | ia | IS-IS inter area |
- | * | candidate default |
- | U | per-user static route |
- | o | ODR |
- | p | periodic downloaded static route |
+
+| Code | Description                      |
+|:---- | -------------------------------- |
+| C    | Connected                        |
+| S    | Static                           |
+| I    | IGRP                             |
+| R    | RIP                              |
+| M    | Mobile                           |
+| B    | BGP                              |
+| D    | EIGRP                            |
+| EX   | EIGRP external                   |
+| O    | OSPF                             |
+| IA   | OSPF Inter Area                  |
+| N1   | OSPF NSSA external type 1        |
+| N2   | OSPF NSSA external type 2        |
+| E1   | OSPF external type 1             |
+| E2   | OSPF external type 2             |
+| E    | EGP                              |
+| i    | IS-IS                            |
+| L1   | IS-IS level-1                    |
+| L2   | IS-IS level-2                    |
+| ia   | IS-IS inter area                 |
+| *    | candidate default                |
+| U    | per-user static route            |
+| o    | ODR                              |
+| p    | periodic downloaded static route |
 
 ### Statics Routing
 - Config routes
@@ -224,14 +227,19 @@ ipv6 access-list <access-list-name>
 
 ## Misc
 ### IOS Commands
-- Config SSH :
-  - Enable SSH v2 `ip ssh version 2`
-  - Set time out : `ip ssh authentication-retries <number-of-retries>`
-  - Set time out : `ip ssh time-out <seconds>`
-- Config interface 3 to 24 : `interface range <link_type> 0/3 - 24`
-- Config interface 3 and 24 : `interface range <link_type> 0/3,  <link_type> 0/24`
-- Don't limite display : `terminal length 0`
-- `traceroute`:Trace route to destination
+- Enable SSH :
+  - Generate key:
+    - Config domain name : `ip domain-name <domain>`
+    - Generate Key : `crypto key generate rsa`
+  - Config SSH :
+    - Enable SSH v2 `ip ssh version 2`
+    - Set time out : `ip ssh authentication-retries <number-of-retries>`
+    - Set time out : `ip ssh time-out <seconds>`
+- Interface range :
+  - from 3 to 24 : `interface range <link_type> 0/3 - 24`
+  - 3 and 24 : `interface range <link_type> 0/3,  <link_type> 0/24`
+- Don't limit display : `terminal length 0`
+- Trace route to destination : `traceroute`
 
 - Show :
   - `show <misc> | {include <inclusion>| section <section-name>}` : Filter show prompt
@@ -239,7 +247,7 @@ ipv6 access-list <access-list-name>
   - `show ip interface` : Displays the IP interface status and configuration
     - `show ip interface brief`: Displays a brief summary of IP status and configuration
 - `show ip route` : Displays the full IP routing table
-  - `show ip route <type|protocol>` : Displays a list of active route, exemple : `show ip route connected`
+  - `show ip route <type|protocol>` : Displays a list of active route, example : `show ip route connected`
 - `show interfaces`
   - `show interfaces <interface> switchport` : Show global or interface switchport config
   - `show interfaces trunk` : Show trunk config
@@ -253,16 +261,16 @@ ipv6 access-list <access-list-name>
 - `ipconfig` : The output of the default command contains the IP address, network mask and gateway for all physical and virtual network adapters.
  - `ipconfig /all` : This option displays the same IP addressing information for each adapter as the default option. Additionally, it displays DNS and WINS settings for each adapter.
 - `nslookup <name>` : Displays information that you can use to diagnose Domain Name System (DNS) infrastructure.
-- `tracert <name|@ip>` : Determines the path taken to a destination by sending Internet Control Message Protocol (ICMP) Echo Request messages to the destination with incrementally increasing Time to Live (TTL) field values. The path displayed is the list of near-side router interfaces of the routers in the path between a source host and a destination. The near-side interface is the interface of the router that is closest to the sending host in the path. Used without parameters, tracert displays help.
+- `tracert <name|@ip>` : Determines the path taken to a destination by sending Internet Control Message Protocol (ICMP) Echo Request messages to the destination with incrementally increasing Time to Live (TTL) field values. The path displayed is the list of near-side router interfaces of the routers in the path between a source host and a destination. The near-side interface is the interface of the router that is closest to the sending host in the path. Used without parameters, `tracert` displays help.
 
 ## Others
 - Line configuration :
   - Point to point: PPP (Serial)
-  - Multipoint: Ethernet (FastEthernet/GigabitEthernet/...)
+  - Multipoint: Ethernet (FastEthernet / GigabitEthernet / ...)
 
-| Basis for comparaison | Point-to-Point | Multipoint |
-|----|----|----|
-| Link | there is dedicated link between two devices. | The link is shared between more than two devices. |
-| Channel Capacity | The Channel's entire capacity is reserved for the two connected devices. | The channel's capacity is shared temporaly among the devices connected to the link. |
-| Transmitter and Receiver | There is a single transmitter and a single receiver. | There is a single transmitter and multiple receivers. |
-| Example | Frame relay, T-carrier, X.25, etc. | Frame relay, token ring, Ethernet, ATM, etc. |
+| Basis for comparison     | Point-to-Point                                                           | Multipoint                                                                           |
+| ------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| Link                     | there is dedicated link between two devices.                             | The link is shared between more than two devices.                                    |
+| Channel Capacity         | The Channel's entire capacity is reserved for the two connected devices. | The channel's capacity is shared temporally among the devices connected to the link. |
+| Transmitter and Receiver | There is a single transmitter and a single receiver.                     | There is a single transmitter and multiple receivers.                                |
+| Example                  | Frame relay, T-carrier, X.25, etc.                                       | Frame relay, token ring, Ethernet, ATM, etc.                                         |

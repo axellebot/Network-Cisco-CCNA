@@ -1,5 +1,5 @@
 # Cheatography - CCNA1
-## OS
+## Commands Basis
 ### Commons
 - `ipconfig` command
 	- `ipconfig <IP@> <IPmask@> <gatewayIP@` : set the IP @ and the subnet mask @
@@ -11,13 +11,13 @@
 	- `netstat -n` : Display ip@ and port number
 - `ssh -l <username> <@IP>` : Start ssh connection
 
-## IOS
+### IOS
 Access methods :
 - Console (don't need network configuration)
 - Telnet
 - SSH
 
-### Commons
+#### Commons
 - Prompts :
 	- `>` : standard mode
 	- `#` : root (voir diff croisillon vs diese)
@@ -25,14 +25,14 @@ Access methods :
 	- `#(config-if)` : interface config mode
 	- `#(config-line)` : line config mode
 - `[<cmd>]?` : global help or command help
-- `do <cmd>` : do lower level command
+- `do <cmd>` : do lower level commands
 - `exit` | `logout`  :  Exit from the EXEC
 
-### Normal Mode
+#### Normal Mode
 - Prompt : `>`
 - `traceroute <IPV4/V6 @>` : know routers between hosts (>ping)
 
-### Enable Mode (SU)
+#### Enable Mode (SU)
 - Prompt : `#`
 - `enable` : enter admin mode (more command)
 - `disable` : exit admin mode
@@ -61,7 +61,7 @@ Access methods :
 	- `copy running-config startup-config` | `write`: save running config
 	- `copy startup-config running-config` : undo running config modification
 
-### Configuration Mode
+#### Configuration Mode
 - Prompt : `#(config)`
 - `hostname <name>` : rename switch
 - `configure terminal` : enter configuration mode on terminal
@@ -85,7 +85,7 @@ Access methods :
 - `interface <interface_type> <0-9>` : Enter config interface mode for # X
 - `security passwords min-length <count>` : Set a minimum length to a password
 
-### Line Configuration Mode
+#### Line Configuration Mode
 - Prompt: `#(config-line)`
 - `line <line_type> <line#>` : enter config mode on terminal type for line # X
 	Exemples :
@@ -98,66 +98,97 @@ Access methods :
 	- `transport input ssh`
 	- `login local`
 
-### Interface Configuration Mode
+#### Interface Configuration Mode
 - Prompt : `#hostname(config-if)`
 - `interface <interface_type> <interface#>` : Enter config interface mode on interface type for # X :
-	Exemple : `interface vlan <vlan#>` : Enter configuration mode for Vlan number #
+	Example : `interface vlan <vlan#>` : Enter configuration mode for VLAN number #
 - `[no] shutdown` : toggle interface
-- `ip` : config ip :
-	- `ip[v6] address <@IP> <mask>` : change ip and IPmask
-	- `ip[v6] address <@IP>/<mask>` : change ip
+- `ip` : config IP :
+	- `ip[v6] address <@IP> <mask>` : change IP and IP mask
+	- `ip[v6] address <@IP>/<mask>` : change IP
 	- `ip[v6] default-gateway <IP@>` : add default gateway
 	- `ipv6 address <@IPv6> link-local` : change link local IPv6 @
 		- `ipv6 address FE80::1 link-local`
 - `description <desc>` : set description to the interface
 
----
+## Protocol Basis
 
-## OSI Model
-![OSI Model](./images/osi-small.png)
+### Protocol Examples
 
-### Protocols Resume
-- Host layers
-	- Application Layer (PDU : Data) :
-		- DNS : Domaine Name System
-		- FTP : File Transfert Protocol
-		- SSH : Secure Shell
-		- SMTP :
-		- TLS/SSL
-		- XMPP
-		- HTTP
-	- Transport Layer (PDU : Segment/Datagram) :
-		- TCP : Transport Communication Protocol (0x06 in ethernet type field)
-		- UDP : User Datagram Protocol (0x11 in ethernet type field)
-- Media layers :
-	- Network Layer (PDU : Packet) :
-		- IP (IPv4/IPv6): Internet Protocol (type 0800 for ethernet type field) [more](https://en.wikipedia.org/wiki/List_of_IP_protocol_numbers) :
-			- RIP : Routing Information Protocol
-			- EIGRP : Enhanced Interior Gateway Routing Protocol (0x58)
-			- ICMP : Internet Control Message Protocol (0x01  for IP type field)
-			- IGMP : Internet Group Management Protocol (0x02 for IP type field)
-			- OSPF : Open Shortest Path First (0x89 for IP type field)
-		- AppleTalk :
-	- Data Link Layer (PDU : Frame) :
-		- Ethernet  IEEE 802.3
-		- ARP : Address Resolution Procotol (type 0806 for ethernet type field)
-		- MAC (sublayer): Media Access Control
-		- LLC (sublayer) : Logical Link Control
-			- CSMA/CA : Carrier-Sense Multiple Access with Collision Avoidance
-			- CSMA/CD : Carrier-Sense Multiple Access with Collision Detection
-		- HDLC :
-		- STP : Spanning Tree Protocol
-			Running on bridges and switches
-			ensure that there is no loops (cause by redundant paths)
-		- PPP : Point to Point Protocol : Used to establish a direct connection between two nodes
-		- Frame Relay
-		- ATM (Asynchronous Transfer Mode)
-	- Physical Layer (PDU : Bit):
-		- Wifi 802.11
-		- Bluetooth 802.15.1
-		- DSL : Digital Subscriber Line
+Miscellaneous application protocols (PDU : Data) :
+- DNS : Domaine Name System
+- FTP : File Transfer Protocol
+- SSH : Secure Shell
+- SMTP :
+- XMPP
+- HTTP/HTTPS
+- ARP : Address Resolution Protocol (type 0806 for ethernet type field)
+- STP (Spanning Tree Protocol)
+	Running on bridges and switches
+	ensure that there is no loops (cause by redundant paths)
+- TLS/SSL
+
+Routing Protocols:
+- RIP : Routing Information Protocol
+- EIGRP : Enhanced Interior Gateway Routing Protocol (0x58)
+- ICMP : Internet Control Message Protocol (0x01  for IP type field)
+- IGMP : Internet Group Management Protocol (0x02 for IP type field)
+- OSPF : Open Shortest Path First (0x89 for IP type field)
+
+Transport Protocols (PDU : Segment/Datagram) :
+- TCP : Transport Communication Protocol (0x06 in IP type field)
+- UDP : User Datagram Protocol (0x11 in IP type field)
+- QUIC : Quick UDP Internet Connections
+
+IEEE Protocols :
+- IEEE 802.3: Ethernet
+- IEEE 802.4: Token Bus
+- IEEE 802.11: Wireless LAN (WLAN) & Mesh (Wi-Fi certification)
+- IEEE 802.15: Bluetooth
+- IEEE 802.16: WiMax
+
+Network Protocols (PDU : Packet) :
+- IP (IPv4/IPv6): Internet Protocol (type 0800 for ethernet type field) [more](https://en.wikipedia.org/wiki/List_of_IP_protocol_numbers)
+- AppleTalk
+
+Data Link Layer (PDU : Frame) :
+- From ITU-T:
+	- G.992: ADSL
+	- G.8100-G.8199: MPLS over Transport aspect
+	- G.921: ISDN
+	- G.922: Frame Relay
+- From ISO:
+	- HDLC (High Level Data Link Control)
+- MAC (sublayer): Media Access Control
+- LLC (sublayer) : Logical Link Control
+	- CSMA/CA : Carrier-Sense Multiple Access with Collision Avoidance
+	- CSMA/CD : Carrier-Sense Multiple Access with Collision Detection
+- PPP : Point to Point Protocol : Used to establish a direct connection between two nodes
+- ATM (Asynchronous Transfer Mode)
+
+- Physical Layer (PDU : Bit):
+	- DSL : Digital Subscriber Line
+
+### IP
+
+IPv4 class:
+| Class     | Bit      | Start     | End             |
+|:--------- |:-------- |:--------- |:--------------- |
+| Class A   | 0xxxxxxx | 0.0.0.0   | 127.255.255.255 |
+| Class B   | 10xxxxxx | 128.0.0.0 | 191.255.255.255 |
+| Class C   | 110xxxxx | 192.0.0.0 | 223.255.255.255 |
+| Multicast | 1110xxxx | 224.0.0.0 | 239.255.255.255 |
+| Reserved  | 1111xxxx | 240.0.0.0 | 255.255.255.255 |
+
+Cast types :
+- Unicast :
+- Multicast :
+- Broadcast :
+	- Limited
+	- Directed
 
 ### ARP (Address Resolution Protocol)
+
 - Device level 3 :
 	- "ARP Table" presents on devices Also called "ARP Cache"
 	- Associates IP @ with MAC @
@@ -165,25 +196,48 @@ Access methods :
 	- "Mac address Table"
 	- Associates  MAC @ with PORT #
 - Gratuitous ARP Request :
-	- MAC dest @ = "ff:ff:ff:ff:ff:ff"  (broadcast MAC)
+	- MAC dest @ = `ff:ff:ff:ff:ff:ff`  (broadcast MAC)
 	- IP Source and destination @ are the same (IP src @ = IP dest @)
 	- No reply will occures
 	- Update existant entries in ARP tables
 
-### IP
-- Cast :
-	- Unicast :
-	- Multicast :
-	- Broadcast :
-		- Limited
-		- Directed
-
 ### NAT/PAT
 
----
+NAT: Network Address Translation
+PAT: Port Address Translation
+
+```
+# Create pool
+R1(config)#ip nat pool <pool_name> <start IP@> <end IP@> netmask <netmask>
+# Filter with ACL
+R1(config)# ip nat inside source list <ACL> pool <pool_name> [overload]
+
+# Configure interface
+R1(config)#int S0/0/0
+R1(config-if)# ip nat outside
+R1(config)#int S0/0/1
+R1(config-if)# ip nat inside
+```
+
+## Layer Basis
+### OSI Model
+
+OSI (Open Systems Interconnection) model: ![OSI model](./images/osi.png)
+
+Layers :
+- Data Layer (PDU : Data)
+- Transport Layer (PDU : Segment/Datagram)
+- Network Layer (PDU : Packet)
+- Data Link Layer (PDU : Frame) :
+	- MAC (Media Access Control) sublayer
+	- LLC (Logical Link Control) sublayer
+- Physical Layer (PDU : Symbols/Bits)
+
+### TCP/IP Model
+
 
 ## Physical
-### Topology Diagrams :
+### Topology Diagrams
 - Physical :
 Identify the physical location of intermediary devices and cable installation.
 - Logical :
@@ -200,7 +254,7 @@ Auto MDI-X :automatically detects the required cable connection type and configu
 			SFTP : Shielded and Foiled Twisted Pair
 		- Copper Straight-Through Wired Cables
 		- Copper Crossover Wired Cables
-		- Copper Rollover Wired Cables : Perfect symetrie
+		- Copper Rollover Wired Cables : Perfect symmetry
 	- Fiber
 	- Phone
 	- Coaxial
@@ -213,8 +267,8 @@ Auto MDI-X :automatically detects the required cable connection type and configu
 
 - Interfaces :
 	- Serial
-	- GigabitEthernet
-	- FastEthernet
+	- Gigabit Ethernet
+	- Fast Ethernet
 
 ### Network Devices
 It is all node devices
@@ -227,20 +281,11 @@ It is all node devices
 - Security (Firewall)
 - WAN Emulator (DSL Modem, Cable Modem)
 
----
-
-## Organisations :
-- IEEE : Institute of Electrical and Electronics Engineers (Ethernet ...) : Give mac address ID 3 first bytes
-- ISP : Internet Service Provider
-- IETF : Internet Engineering Task Force
-- IANA : Normalize internet ID (IP Address, Autonomous system ID ...)
-
-## IPv4 class
-
-| Class | Bit  | Start | End |
-|:-------------|:-------------|:-------------|:-------------|
-| Class A   | 0xxxxxxx | 0.0.0.0 | 127.255.255.255 |
-| Class B   | 10xxxxxx | 128.0.0.0 | 191.255.255.255 |  
-| Class C   | 110xxxxx | 192.0.0.0 | 223.255.255.255 |
-| Multicast | 1110xxxx | 224.0.0.0 | 239.255.255.255 |
-| Reserved  | 1111xxxx | 240.0.0.0 | 255.255.255.255 |
+## Organizations
+| Organization                                                                              | Aims                              | Examples                                     |
+| ----------------------------------------------------------------------------------------- | --------------------------------- | -------------------------------------------- |
+| ISO (International Organization for Standardization)                                      |                                   |                                              |
+| IEEE (Institute of Electrical and Electronics Engineers)                                  | Give mac address ID 3 first bytes | Ethernet                                     |
+| IETF (Internet Engineering Task Force)                                                    | Standardization (RFC)             | DiffServ / IntServ                           |
+| IANA                                                                                      | Normalize internet ID             | IP Address / Autonomous system / MAC Address |
+| ITU-T  (International Telecommunication Union - Telecommunication Standardization Sector) | Standardization                   | H.264 / X.25                                 |

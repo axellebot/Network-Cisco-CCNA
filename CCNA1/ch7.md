@@ -18,7 +18,7 @@ Type of IPV6 address :
 - Multicast
 - Anycast (reach the nearest from a group)
 
-- Subnet mask with '/'
+- Subnet mask with `/`
 
 ### Unicast
 IPV6 Unicast Addressing :
@@ -50,9 +50,9 @@ Structure :
 - 4 hextet : interface ID
 
 ##### SLAAC (State Less Address Auto Configuration)
-Set Dynamicaly Global unicast. No data saved ("State Less").
-- Get metadata from the router (RA Router Announcmenet / RS Router Solicitation) :
-  - Prefixe, with lenght
+Set Dynamically Global unicast. No data saved ("State Less").
+- Get metadata from the router (RA Router Announcement / RS Router Solicitation) :
+  - Prefix with length
   - Default Gateway Address
 - Generate interface ID :
   - Based on MAC address
@@ -62,14 +62,14 @@ Set Dynamicaly Global unicast. No data saved ("State Less").
 
 ##### IPV6 routers :
 Use IPv6 link local for the next hop.
-- Foward IP fragment
+- Forward IP fragment
 - Can be configured with static and dynamic routes
 - Send RA ICMPv6
-- Enable with cmd : `IPv6 unicast routing`
+- Enable with cmd : `ipv6 unicast routing`
 - Can send announce option :
   - SLAAC (all)
-  - stateless DHCPv6 : Router (prefix, default gateway) + DHCPv6 (DNS)
-  - Statefull DHCPv6 (all)
+  - Stateless DHCPv6 : Router (prefix, default gateway) + DHCPv6 (DNS)
+  - Stateful DHCPv6 (all)
 - Announce with link-local (default gateway for the host)
 
 ##### Host generation
@@ -87,8 +87,8 @@ Added auto with global address with `FE80/64`
 
 ## Multicast IPv6
 - Mac address : `33:33:x:x:x:x` with `x:x:x:x` from last 4 bytes of IPv6 global address -> Can check multicast from ethernet
-- `FF02::1:FFxx:xxxx` -> like IPv4 brodcast to all nodes (use by Route Announcement)
-- `FF02::2:FFxx:xxxx` -> like IPv4 brodcast to all routers (use by Route Solicitation)
+- `FF02::1:FFxx:xxxx` -> like IPv4 broadcast to all nodes (use by Route Announcement)
+- `FF02::2:FFxx:xxxx` -> like IPv4 broadcast to all routers (use by Route Solicitation)
 -  ...
 
 ### ICMPv6

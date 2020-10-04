@@ -43,7 +43,7 @@ Spanning Tree Algorithme  (STA)
 ## First Hop Redundancy Protocols - FHRPs
 - 1 Virtual IP@ and 1 Virtual MAC@ to use multiple router
 - 1 Virtual IP@ and Multiple Virtual MAC@ to use multiple router with load balancing
-- Send gratuitous to update the port nuber in ARP Table on switch
+- Send gratuitous to update the port number in ARP Table on switch
 
 Protocols :
 - Virtual Router Without LoadBalancing :

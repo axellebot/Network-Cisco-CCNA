@@ -49,13 +49,13 @@
 - Populate route table :
   - Interface = 1 subnet = 1 route -> letter C in routing table
   - Learn by routing protocols : - > different in routing table (ex: EIGRP /RIP /OSPF)
-  - Manualy -> Statique S in routing table  
-- Routing table datas type :
+  - Manually -> Static S in routing table  
+- Routing table data type :
   - Identify the how we learn the Network (S Static, D Dynamic)
   - Identify the destination
   - Identify the fiability (Directly connected/ Static / other protocol )
   - Identify the metric to reach the remote network
-  - Identify the ip address of the next jump
+  - Identify the IP address of the next jump
   - Identify the age of the route
   - Identify the output interface
 
@@ -63,21 +63,21 @@
 - Anatomy :
   - CPU
   - Memory :
-    - RAM : Runnong config
+    - RAM : Running config
     - NVRAM : Startup config
     - Flash : IOS
-    - ROM : POST (Power On Self Test) + Boostrap (where to pull IOS Flash or network ?) + IOS limited
+    - ROM : POST (Power On Self Test) + Bootstrap (where to pull IOS Flash or network ?) + IOS limited
 - Connections :
   - EHWIC Slots
   - Flash Slots
   - AUX port
   - LAN interface
   - Console RJ45
-- Interfaces LAN + WAN (must be configured to remotly config)
-    - Data : LAN RJ45 + WAN serie (extra bounds)
+- Interfaces LAN + WAN (must be configured to remotely config)
+    - Data : LAN RJ45 + Serial WAN  (extra bounds)
     - Manage : AUX + Console (intra bound)
 
-- Boostrap :
+- Bootstrap :
   - load iOS from ROM in RAM
   - load configuration from SFTP or NVRAM or in RAM
   - `show version`-> show storage data and physical link data
