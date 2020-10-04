@@ -5,7 +5,7 @@
 ## Routing Dynamics Protocols
 Two families :
 - IGP Protocol : Intern of autonomous system :
-  - Distance VEctor :
+  - Distance Vector :
     - RIPv2 + RIPng
     - EIGRP + EIGRP for IPv6 (DUAL)
   - Link state :
@@ -27,7 +27,7 @@ Two families :
 Composed of :
 - Data structures (table or data bases)
 - Routing Protocol Messages
-- Algorithme
+- Algorithm
 
 #### Roles :
 - Pro :
@@ -100,41 +100,49 @@ Routing without class :
 
 ## RIP & RIPng
 RIP is encapsulate by UDP
+
 ### RIPv1 :
 ```
-router rip
-network <class_net_address>
+R1(config)#router rip
+R1(config-rtr)#network <class_net_address>
 ```
 
 - `show ip protocols` : Display enabled routing protocols
 
 ### RIPv2 :
 ```
-router rip
-version 2
-no auto summary
-network <class_net_address>
+R1(config)#router rip
+R1(config-rtr)#version 2
+R1(config-rtr)#no auto summary
+R1(config-rtr)#network <class_net_address>
 ```
 
 Sending useless route update on a LAN can :
 - Use bandwidth
-- Use ressources
-- cause Security problems
+- Use resources
+- Cause security issue
 
-- `passive interface` : Disable routing protocol on interface
-- `default-information-orginate` : include default static route in routing update protocol
+- Disable routing protocol on interface:
+```
+R1(config-router)#passive interface <interface>
+```
+
+- Include default static route in routing update protocol :
+```
+R1(config-router)#default-information orginate
+```
 
 ### RIPng (IPv6)
 ```
-ipv6 unicast-routing
+R1(config)#ipv6 unicast-routing
 
-interface gigabiteethernet 0/0
-ipv6 rip RIP-AS enable
-no shutdown
+R1(config)#interface gigabiteethernet 0/0
+R1(config-if)#ipv6 rip RIP-AS enable
+R1(config-if)#no shutdown
 
-interface serial 0/0/0
-ipv6 rip RIP-AS enable
-no shutdown
+R1(config)#interface serial 0/0/0
+R1(config-if)#ipv6 rip RIP-AS enable
+R1(config-if)#no shutdown
 ```
 
 ## Link-state Routing
